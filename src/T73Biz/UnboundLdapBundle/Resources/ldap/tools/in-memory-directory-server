@@ -42,7 +42,7 @@ fi
 
 # Invoke the tool with the provided command-line arguments.
 "${JAVA_CMD}" ${JAVA_ARGS} \
-     -cp "${TOOLS_DIR}/../unboundid-ldapsdk-se.jar:${CLASSPATH}" \
+     -cp "${TOOLS_DIR}/unboundid-ldapsdk-se.jar:${CLASSPATH}" \
      com.unboundid.ldap.listener.InMemoryDirectoryServerTool "${@}" &
 
 echo $! > /tmp/in-memory-ldap.pid

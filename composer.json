@@ -1,0 +1,37 @@
+{
+    "name": "t73biz/unbound-ldap-bundle",
+    "description": "Unbound Test Server Bundle for Symfony 3",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ronald Chaplin",
+            "email": "rchaplin@t73.biz"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "symfony/console": "^3.0",
+        "symfony/process": "^3.0",
+        "symfony/dependency-injection": "^3.0",
+        "symfony/config": "^3.0",
+        "symfony/http-kernel": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        },
+		"classmap": [
+			"app/AppKernel.php"
+		]
+    },
+    "require-dev": {
+        "symfony/framework-bundle": "^3.0",
+        "phpunit/phpunit": "^5.2"
+    },
+  	"extra": {
+		"symfony-app-dir": "app",
+		"symfony-tests-dir": "Tests"
+	}
+}

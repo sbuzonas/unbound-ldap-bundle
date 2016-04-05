@@ -1,0 +1,10 @@
+services:
+  t73biz.command.unbound_server_run_command:
+    class: T73Biz\UnboundLdapBundle\Command\UnboundServerRunCommand
+    arguments:
+      - '%unbound_server.bind_address%'
+      - '%unbound_server.port%'
+      - '%unbound_server.base_dn%'
+      - '%unbound_server.ldif%'
+    tags:
+      - { name: console.command }

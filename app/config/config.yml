@@ -1,0 +1,24 @@
+t73_biz_unbound_ldap:
+    unbound_server:
+        bind_address: 127.0.0.1
+        port: 6389
+        base_dn: dc=example,dc=com
+        ldif: '@T73BizUnboundLdapBundle/Resources/ldap/sample.ldif'
+
+parameters:
+    locale: en
+
+framework:
+    #esi:             ~
+    translator: ~
+    secret:          NotSoSecret
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        handler_id:  session.handler.native_file
+        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+    fragments:       ~
+    http_method_override: true
+    assets: ~
