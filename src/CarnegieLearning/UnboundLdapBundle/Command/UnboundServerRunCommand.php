@@ -27,7 +27,7 @@ class UnboundServerRunCommand extends UnboundServerCommand
             ->setName('unbound:server:run')
             ->setDescription('Runs UnboundID in-memory LDAP server')
             ->setHelp(<<<'EOF'
-The <info>%command.name%</info> runs UnboundID in-memory LDAP server:
+The <info>%command.name%</info> command runs UnboundID in-memory LDAP server:
 
   <info>%command.full_name%</info>
 
