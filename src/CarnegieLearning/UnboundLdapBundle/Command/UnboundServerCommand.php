@@ -1,5 +1,5 @@
 <?php
-namespace T73Biz\UnboundLdapBundle\Command;
+namespace CarnegieLearning\UnboundLdapBundle\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -98,7 +98,7 @@ abstract class UnboundServerCommand extends Command implements ContainerAwareInt
      */
     protected function getLockFile()
     {
-        return sys_get_temp_dir().'/in-memory-ldap.pid';
+        return '/tmp/in-memory-ldap.pid';
     }
 
     /**

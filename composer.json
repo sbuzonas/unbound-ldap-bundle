@@ -1,5 +1,5 @@
 {
-    "name": "t73biz/unbound-ldap-bundle",
+    "name": "carnegielearning/unbound-ldap-bundle",
     "description": "Unbound Test Server Bundle for Symfony 3",
     "type": "library",
     "license": "MIT",
@@ -12,26 +12,55 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
+        "php": "^5.5.9|^7.0",
+        "sensio/distribution-bundle": "^5.0",
+        "incenteev/composer-parameter-handler": "^2.0",
         "symfony/console": "^3.0",
         "symfony/process": "^3.0",
         "symfony/dependency-injection": "^3.0",
         "symfony/config": "^3.0",
         "symfony/http-kernel": "^3.0"
     },
+    "require-dev": {
+        "symfony/framework-bundle": "^3.0",
+        "phpunit/phpunit": "^4.8"
+    },
     "autoload": {
         "psr-4": {
-            "": "src/"
+            "CarnegieLearning\\UnboundLdapBundle\\": "src/CarnegieLearning/UnboundLdapBundle/"
         },
 		"classmap": [
 			"app/AppKernel.php"
 		]
     },
-    "require-dev": {
-        "symfony/framework-bundle": "^3.0",
-        "phpunit/phpunit": "^4.8"
+    "scripts": {
+        "bootstrap": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap"
+        ],
+        "post-install-cmd": [
+            "@bootstrap"
+        ],
+        "post-update-cmd": [
+            "@bootstrap"
+        ],
+        "test": [
+            "composer validate --no-interaction",
+            "parallel-lint kernel",
+            "phpunit",
+            "phpcs"
+        ]
     },
-  	"extra": {
-		"symfony-app-dir": "app",
-		"symfony-tests-dir": "Tests"
-	}
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "symfony-app-dir": "app",
+        "symfony-bin-dir": "bin",
+        "incenteev-parameters": [
+            {
+                "file": "app/config/parameters.yml"
+            }
+        ]
+    }
 }

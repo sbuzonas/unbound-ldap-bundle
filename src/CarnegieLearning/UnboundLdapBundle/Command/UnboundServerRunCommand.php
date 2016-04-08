@@ -1,5 +1,5 @@
 <?php
-namespace T73Biz\UnboundLdapBundle\Command;
+namespace CarnegieLearning\UnboundLdapBundle\Command;
 
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;

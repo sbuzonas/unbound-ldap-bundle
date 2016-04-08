@@ -1,13 +1,13 @@
 <?php
 
-namespace T73Biz\UnboundLdapBundle\DependencyInjection;
+namespace CarnegieLearning\UnboundLdapBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
-class T73BizUnboundLdapExtension extends Extension
+class CarnegieLearningUnboundLdapExtension extends Extension
 {
     /**
      * {@inheritdoc}
