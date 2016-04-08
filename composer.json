@@ -28,7 +28,7 @@
     },
     "require-dev": {
         "symfony/framework-bundle": "^3.0",
-        "phpunit/phpunit": "^5.2"
+        "phpunit/phpunit": "^4.8"
     },
   	"extra": {
 		"symfony-app-dir": "app",
