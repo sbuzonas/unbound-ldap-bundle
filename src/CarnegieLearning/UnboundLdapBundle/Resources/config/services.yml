@@ -1,6 +1,6 @@
 services:
   t73biz.command.unbound_server_run_command:
-    class: T73Biz\UnboundLdapBundle\Command\UnboundServerRunCommand
+    class: CarnegieLearning\UnboundLdapBundle\Command\UnboundServerRunCommand
     arguments:
       - '%unbound_server.bind_address%'
       - '%unbound_server.port%'

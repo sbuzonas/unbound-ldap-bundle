@@ -15,7 +15,7 @@ class AppKernel extends Kernel
     {
         $bundles = [
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new T73Biz\UnboundLdapBundle\T73BizUnboundLdapBundle()
+            new CarnegieLearning\UnboundLdapBundle\CarnegieLearningUnboundLdapBundle()
         ];
 
         return $bundles;

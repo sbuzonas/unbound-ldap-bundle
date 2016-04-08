@@ -1,6 +1,6 @@
 <?php
 
-namespace T73Biz\UnboundLdapBundle\DependencyInjection;
+namespace CarnegieLearning\UnboundLdapBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -18,7 +18,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('t73_biz_unbound_ldap');
+        $rootNode = $treeBuilder->root('carnegie_learning_unbound_ldap');
 
         $rootNode
             ->children()
@@ -28,7 +28,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('bind_address')->defaultValue('127.0.0.1')->end()
                         ->scalarNode('port')->defaultValue('6389')->end()
                         ->scalarNode('base_dn')->defaultValue('dc=example,dc=com')->end()
-                        ->scalarNode('ldif')->defaultValue('@T73BizUnboundLdapBundle/Resources/ldap/sample.ldif')
+                        ->scalarNode('ldif')->defaultValue('@CarnegieLearningUnboundLdapBundle/Resources/ldap/sample.ldif')->end()
                     ->end()
                 ->end()
             ->end()

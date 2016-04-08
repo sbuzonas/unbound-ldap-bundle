@@ -1,0 +1,8 @@
+# -*- mode: YAML -*-
+# Parameters that differ between environments belong in this file
+# http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+parameters:
+    unbound_server_bind_address: 127.0.0.1
+    unbound_server_port: 6389
+    unbound_server_base_dn: dc=example,dc=com
+    unbound_server_ldif: '%kernel.root_dir%/../src/CarnegieLearning/UnboundLdapBundle/Resources/ldap/sample.ldif'
