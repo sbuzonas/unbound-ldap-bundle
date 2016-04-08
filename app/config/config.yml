@@ -1,9 +1,12 @@
-t73_biz_unbound_ldap:
+imports:
+  - { resource: parameters.yml }
+
+carnegie_learning_unbound_ldap:
     unbound_server:
-        bind_address: 127.0.0.1
-        port: 6389
-        base_dn: dc=example,dc=com
-        ldif: '@T73BizUnboundLdapBundle/Resources/ldap/sample.ldif'
+        bind_address: "%unbound_server_bind_address%"
+        port: "%unbound_server_port%"
+        base_dn: "%unbound_server_base_dn%"
+        ldif: "%unbound_server_ldif%"
 
 parameters:
     locale: en

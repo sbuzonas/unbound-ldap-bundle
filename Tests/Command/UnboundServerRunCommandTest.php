@@ -1,9 +1,9 @@
 <?php
-namespace T73Biz\UnboundLdapBundle\Tests\Command;
+namespace CarnegieLearning\UnboundLdapBundle\Tests\Command;
 
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
-use T73Biz\UnboundLdapBundle\Tests\Kernel\TestKernel;
+use CarnegieLearning\UnboundLdapBundle\Tests\Kernel\TestKernel;
 
 class UnboundServerRunCommandTest extends \PHPUnit_Framework_TestCase
 {

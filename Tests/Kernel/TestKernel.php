@@ -1,9 +1,9 @@
 <?php
-namespace T73Biz\UnboundLdapBundle\Tests\Kernel;
+namespace CarnegieLearning\UnboundLdapBundle\Tests\Kernel;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Kernel;
-use T73Biz\UnboundLdapBundle\Tests\Kernel\AppKernel;
+use CarnegieLearning\UnboundLdapBundle\Tests\Kernel\AppKernel;
 /**
  * The kernel class needs to be autoloaded in order for this to work.
  * @see https://github.com/symfony/symfony-standard/commit/ab358a4458b052fc80a3e99a93b125c1ef133a38
