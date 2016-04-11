@@ -4,6 +4,7 @@ namespace CarnegieLearning\UnboundLdapBundle\Command;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
@@ -35,6 +36,11 @@ abstract class UnboundServerCommand extends Command implements ContainerAwareInt
     private $container;
 
     /**
+     * @var Filesystem
+     */
+    private $filesystem;
+
+    /**
      * UnboundServerCommand constructor.
      * @param null|string $address
      * @param integer $port
@@ -47,6 +53,7 @@ abstract class UnboundServerCommand extends Command implements ContainerAwareInt
         $this->port = $port;
         $this->baseDn = $baseDn;
         $this->ldif = $ldif;
+        $this->filesystem = new Filesystem();
 
         parent::__construct();
     }
@@ -98,7 +105,28 @@ abstract class UnboundServerCommand extends Command implements ContainerAwareInt
      */
     protected function getLockFile()
     {
-        return '/tmp/in-memory-ldap.pid';
+        return sprintf('%s/%s-%s.pid', sys_get_temp_dir(), $this->address, $this->port);
+    }
+
+    /**
+     * This will create the pid file if it doesn't exist with the pid of the process written in it.
+     *
+     * @param integer $pid
+     */
+    protected function setLockFile($pid)
+    {
+        if(!$this->filesystem->exists($this->getLockFile()))
+        {
+            $this->filesystem->dumpFile($this->getLockFile(), $pid);
+        }
+    }
+
+    /**
+     *
+     */
+    protected function removeLockFile()
+    {
+        $this->filesystem->remove($this->getLockFile());
     }
 
     /**
@@ -117,16 +145,14 @@ abstract class UnboundServerCommand extends Command implements ContainerAwareInt
     protected function killOtherServer()
     {
         $pid = $this->getLockFilePid();
+        $this->removeLockFile();
         $kill = new Process('kill -9 ' . $pid);
-        $clean = new Process('rm ' . $this->getLockFile());
         try {
             $kill->mustRun();
-
             echo $kill->getOutput();
         } catch (ProcessFailedException $e) {
             echo $e->getMessage();
         }
-
     }
 
     /**
@@ -137,10 +163,12 @@ abstract class UnboundServerCommand extends Command implements ContainerAwareInt
      */
     protected function isOtherServerProcessRunning($address)
     {
-        $lockFile = $this->getLockFile();
+        if ($this->filesystem->exists($this->getLockFile())) {
 
-        if (file_exists($lockFile)) {
-            return true;
+            $kill = new Process('kill -0 ' . $this->getLockFilePid());
+            $kill->run();
+
+            return $kill->isSuccessful();
         }
 
         list($hostname, $port) = explode(':', $address);

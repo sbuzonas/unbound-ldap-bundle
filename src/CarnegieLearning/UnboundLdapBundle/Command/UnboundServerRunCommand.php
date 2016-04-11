@@ -92,7 +92,7 @@ EOF
         }
 
         if ($this->isOtherServerProcessRunning($address)) {
-            $io->error(sprintf('A process is already listening on ldap://%s', $address));
+            $io->error(sprintf('A process is already listening on ldap://%s - PID:%s', $address, $this->getLockFile()));
 
             if($input->getOption('force')) {
                 $io->warning(sprintf('Forcing the server with PID: %d to restart', $this->getLockFilePid()));
@@ -123,12 +123,13 @@ EOF
         }
 
         $process->start();
+        $this->setLockFile($process->getPid());
 
-        $process->wait(function ($type, $buffer) {
+        $process->wait(function ($type, $buffer) use ($io, $process) {
             if (Process::ERR === $type) {
-                echo 'ERR > '.$buffer;
+                $io->error(sprintf("ERR > %s\n\r",$buffer));
             } else {
-                echo 'OUT > '.$buffer;
+                $io->comment($buffer);
             }
         });
 
@@ -155,6 +156,6 @@ EOF
 
         list($host, $port) = explode(':', $address, 2);
 
-        return new ProcessBuilder([$script, '--port', $port, '--baseDN', $baseDn, '--ldiffile', $seed]);
+        return new ProcessBuilder(['exec', $script, '--port', $port, '--baseDN', $baseDn, '--ldiffile', $seed]);
     }
 }
