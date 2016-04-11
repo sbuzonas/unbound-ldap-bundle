@@ -1,26 +1,22 @@
 <?php
 namespace CarnegieLearning\UnboundLdapBundle\Tests\Command;
 
+use CarnegieLearning\UnboundLdapBundle\Command\UnboundServerRunCommand;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
-use CarnegieLearning\UnboundLdapBundle\Tests\Kernel\TestKernel;
 
 class UnboundServerRunCommandTest extends \PHPUnit_Framework_TestCase
 {
-    use TestKernel;
+
 
     public function testExecute()
     {
-        $application = new Application($this->kernel);
-
+        $application = new Application(new \AppKernel('test', true));
+        $application->add(new UnboundServerRunCommand('127.0.0.1', 6389, 'dc=example,dc=com', 'Tests/Fixtures/sample.ldif'));
+        
         $command = $application->find('unbound:server:run');
         $commandTester = new CommandTester($command);
-        $commandTester->execute(
-            array(
-                'name'    => 'Fabien',
-                '--yell'  => true,
-            )
-        );
+        $commandTester->execute(['-f']);
 
         echo ($commandTester->getDisplay());
 

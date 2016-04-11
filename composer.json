@@ -23,7 +23,8 @@
     },
     "require-dev": {
         "symfony/framework-bundle": "^3.0",
-        "phpunit/phpunit": "^4.8"
+        "phpunit/phpunit": "^4.8",
+        "jakub-onderka/php-parallel-lint": "^0.9.2"
     },
     "autoload": {
         "psr-4": {
@@ -46,7 +47,7 @@
         ],
         "test": [
             "composer validate --no-interaction",
-            "parallel-lint kernel",
+            "parallel-lint app",
             "phpunit",
             "phpcs"
         ]
