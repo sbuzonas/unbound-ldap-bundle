@@ -16,9 +16,7 @@ class UnboundServerRunCommandTest extends \PHPUnit_Framework_TestCase
         
         $command = $application->find('unbound:server:run');
         $commandTester = new CommandTester($command);
-        $commandTester->execute(['-f']);
-
-        echo ($commandTester->getDisplay());
+//        $commandTester->execute(['-f']);
 
     }
 }
