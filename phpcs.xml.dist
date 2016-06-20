@@ -4,6 +4,8 @@
 
     <file>.</file>
 
+    <exclude-pattern>./app/*</exclude-pattern>
+
     <!-- Exclude 3rd party sources -->
     <exclude-pattern>./vendor/*</exclude-pattern>
 
@@ -68,6 +70,13 @@
     </rule>
 
     <!--
+        Turn off the short description for doc comments
+    -->
+    <rule ref="Generic.Commenting.DocComment.MissingShort">
+        <severity>0</severity>
+    </rule>
+
+    <!--
         Set different property values for fixing and checking.
     -->
     <rule ref="Generic.Files.LineLength">
@@ -75,6 +84,14 @@
             <property phpcs-only="true" name="lineLimit" value="80"/>
             <property phpcbf-only="true" name="lineLimit" value="120"/>
         </properties>
+    </rule>
+
+    <!--
+        Skip namespace requirement for kernel directory
+    -->
+    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+      <exclude-pattern>./app/*</exclude-pattern>
+      <exclude-pattern>./kernel/*</exclude-pattern>
     </rule>
 
     <!--
