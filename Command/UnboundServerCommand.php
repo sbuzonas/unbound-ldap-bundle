@@ -42,6 +42,7 @@ abstract class UnboundServerCommand extends Command implements ContainerAwareInt
 
     /**
      * UnboundServerCommand constructor.
+     *
      * @param null|string $address
      * @param integer $port
      * @param string $baseDn
@@ -115,15 +116,11 @@ abstract class UnboundServerCommand extends Command implements ContainerAwareInt
      */
     protected function setLockFile($pid)
     {
-        if(!$this->filesystem->exists($this->getLockFile()))
-        {
+        if (!$this->filesystem->exists($this->getLockFile())) {
             $this->filesystem->dumpFile($this->getLockFile(), $pid);
         }
     }
 
-    /**
-     *
-     */
     protected function removeLockFile()
     {
         $this->filesystem->remove($this->getLockFile());
@@ -159,12 +156,12 @@ abstract class UnboundServerCommand extends Command implements ContainerAwareInt
      * This determines if a previous version of the server is already running.
      *
      * @param $address
+     *
      * @return bool
      */
     protected function isOtherServerProcessRunning($address)
     {
         if ($this->filesystem->exists($this->getLockFile())) {
-
             $kill = new Process('kill -0 ' . $this->getLockFilePid());
             $kill->run();
 

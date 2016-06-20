@@ -17,13 +17,13 @@ class UnboundServerRunCommand extends UnboundServerCommand
     protected function configure()
     {
         $this
-            ->setDefinition([
+            ->setDefinition(array(
                 new InputArgument('address', InputArgument::OPTIONAL, 'Address:port', $this->address),
                 new InputOption('port', 'p', InputOption::VALUE_REQUIRED, 'Address port number', $this->port),
                 new InputOption('base-dn', 'd', InputOption::VALUE_REQUIRED, 'BaseDN to set for the server', $this->baseDn),
                 new InputOption('ldif', 'l', InputOption::VALUE_REQUIRED, 'LDIF to populate server with', $this->ldif),
                 new InputOption('force', 'f', InputOption::VALUE_NONE, 'Force a restart of the server')
-            ])
+            ))
             ->setName('unbound:server:run')
             ->setDescription('Runs UnboundID in-memory LDAP server')
             ->setHelp(<<<'EOF'
@@ -94,7 +94,7 @@ EOF
         if ($this->isOtherServerProcessRunning($address)) {
             $io->error(sprintf('A process is already listening on ldap://%s - PID:%s', $address, $this->getLockFile()));
 
-            if($input->getOption('force')) {
+            if ($input->getOption('force')) {
                 $io->warning(sprintf('Forcing the server with PID: %d to restart', $this->getLockFilePid()));
                 $this->killOtherServer();
             } else {
@@ -127,14 +127,14 @@ EOF
 
         $process->wait(function ($type, $buffer) use ($io, $process) {
             if (Process::ERR === $type) {
-                $io->error(sprintf("ERR > %s\n\r",$buffer));
+                $io->error(sprintf("ERR > %s\n\r", $buffer));
             } else {
                 $io->comment($buffer);
             }
         });
 
         if (!$process->isSuccessful()) {
-            $errorMessages = ['UnboundID in-memory LDAP server terminated unexpectedly.'];
+            $errorMessages = array('UnboundID in-memory LDAP server terminated unexpectedly.');
 
             if ($process->isOutputDisabled()) {
                 $errorMessages[] = 'Run the command again with -v option for more details.';
@@ -156,6 +156,6 @@ EOF
 
         list($host, $port) = explode(':', $address, 2);
 
-        return new ProcessBuilder(['exec', $script, '--port', $port, '--baseDN', $baseDn, '--ldiffile', $seed]);
+        return new ProcessBuilder(array('exec', $script, '--port', $port, '--baseDN', $baseDn, '--ldiffile', $seed));
     }
 }
