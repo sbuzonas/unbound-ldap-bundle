@@ -2,6 +2,7 @@
 
 namespace CarnegieLearning\UnboundLdapBundle\Command;
 
+use CarnegieLearning\UnboundLdapBundle\Process\UnboundProcessFactory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
