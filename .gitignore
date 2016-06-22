@@ -1,4 +1,4 @@
-/vendor/
-app/config/parameters.yml
-app/cache
-app/bootstrap.php.cache
+vendor/
+composer.lock
+phpunit.xml
+reports/

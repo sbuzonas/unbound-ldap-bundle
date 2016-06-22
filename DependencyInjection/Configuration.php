@@ -18,17 +18,23 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('carnegie_learning_unbound_ldap');
+        $rootNode = $treeBuilder->root('cli_unbound_ldap');
 
         $rootNode
             ->children()
-                ->arrayNode('unbound_server')
+                ->arrayNode('server')
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('bind_address')->defaultValue('127.0.0.1')->end()
-                        ->scalarNode('port')->defaultValue('6389')->end()
-                        ->scalarNode('base_dn')->defaultValue('dc=example,dc=com')->end()
-                        ->scalarNode('ldif')->defaultValue('@CarnegieLearningUnboundLdapBundle/Resources/ldap/sample.ldif')->end()
+                        ->integerNode('port')
+                            ->min(1)
+                            ->max(65535)
+                            ->defaultValue(6389)
+                        ->end()
+                        ->arrayNode('base_dn')
+                            ->prototype('scalar')->end()
+                        ->end()
+                        ->scalarNode('ldif')->end()
+                        ->scalarNode('schema')->end()
                     ->end()
                 ->end()
             ->end()

@@ -9,6 +9,23 @@ use Symfony\Component\DependencyInjection\Loader;
 
 class CarnegieLearningUnboundLdapExtension extends Extension
 {
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNamespace()
+    {
+        return 'http://www.carnegielearning.com/schema/dic/' . $this->getAlias();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAlias()
+    {
+        return 'cli_unbound_ldap';
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -17,13 +34,17 @@ class CarnegieLearningUnboundLdapExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('unbound_server.bind_address', $config['unbound_server']['bind_address']);
-        $container->setParameter('unbound_server.port', $config['unbound_server']['port']);
-        $container->setParameter('unbound_server.base_dn', $config['unbound_server']['base_dn']);
-        $container->setParameter('unbound_server.ldif', $config['unbound_server']['ldif']);
+        foreach ($config['server'] as $k => $v) {
+            $this->setContainerParameter($container, $k, $v);
+        }
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
     }
 
+    private function setContainerParameter(ContainerBuilder $container, $key, $value)
+    {
+        $param = sprintf('cli_unbound_ldap.%s', $key);
+        $container->setParameter($param, $value);
+    }
 }
