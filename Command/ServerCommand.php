@@ -12,6 +12,19 @@ abstract class ServerCommand extends ContainerAwareCommand
 {
 
     /**
+     * @var UnboundProcessFactory
+     */
+    protected $processFactory;
+
+    public function __construct(UnboundProcessFactory $processFactory = null)
+    {
+        parent::__construct();
+
+        $this->processFactory = $processFactory ?: new UnboundProcessFactory;
+    }
+
+
+    /**
      * {@inheritdoc}
      */
     protected function configure()

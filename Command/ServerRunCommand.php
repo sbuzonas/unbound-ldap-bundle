@@ -32,9 +32,8 @@ class ServerRunCommand extends ServerCommand
     {
         $io = new SymfonyStyle($input, $cliOutput = $output);
 
-        $factory = new UnboundProcessFactory;
         try {
-            $builder = $factory->create();
+            $builder = $this->processFactory->create();
         } catch (RuntimeException $e) {
             $io->error($e->getMessage());
 
