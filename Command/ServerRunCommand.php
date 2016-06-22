@@ -67,7 +67,7 @@ class ServerRunCommand extends ServerCommand
 
         $process = $builder->getProcess();
 
-        $process->run(function($type, $message) use ($cliOutput) {
+        $process->run(function ($type, $message) use ($cliOutput) {
             switch ($type) {
                 case Process::OUT:
                     $cliOutput->writeln($message);

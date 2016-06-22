@@ -33,11 +33,11 @@ class UnboundProcessFactory
     {
         $builder = $this->processBuilderFactory->create();
         $builder->setPrefix($this->getJavaRuntime());
-        $builder->setArguments([
+        $builder->setArguments(array(
             '-cp',
             realpath(__DIR__ . '/../Resources/unboundid/unboundid-ldapsdk-se.jar'),
             self::UNBOUND_SERVER_CLASS,
-        ]);
+        ));
 
         return $builder;
     }
