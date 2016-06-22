@@ -16,14 +16,22 @@ class UnboundProcessFactory
      */
     private $executableFinder;
 
-    public function __construct(JavaExecutableFinder $executableFinder = null)
-    {
-        $this->executableFinder = $executableFinder ?: new JavaExecutableFinder;
+    /**
+     * @var ProcessBuilderFactory
+     */
+    private $processBuilderFactory;
+
+    public function __construct(
+        JavaExecutableFinder  $executableFinder      = null,
+        ProcessBuilderFactory $processBuilderFactory = null
+    ) {
+        $this->executableFinder      = $executableFinder      ?: new JavaExecutableFinder;
+        $this->processBuilderFactory = $processBuilderFactory ?: new ProcessBuilderFactory;
     }
 
     public function create()
     {
-        $builder = new ProcessBuilder;
+        $builder = $this->processBuilderFactory->create();
         $builder->setPrefix($this->getJavaRuntime());
         $builder->setArguments([
             '-cp',
