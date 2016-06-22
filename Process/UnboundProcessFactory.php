@@ -2,6 +2,7 @@
 
 namespace CarnegieLearning\UnboundLdapBundle\Process;
 
+use Symfony\Component\Process\Exception\RuntimeException;
 use Symfony\Component\Process\ProcessBuilder;
 use Symfony\Component\Process\ProcessUtils;
 
